@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard | File Editor & Summariser</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="dashboard-container">
+  <header>
+    <h1>File Editor & Summariser</h1>
+    <a href="{{ url_for('logout') }}">Logout</a>
+  </header>
+
+  <main>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="flash">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <!-- Merge Files -->
+    <div class="card">
+      <div class="card-header">
+        <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="13" cy="10" r="3"/><path d="M7 12h6M17 12h-6M13 3v6M13 15v6"/>
+        </svg>
+        <h3>Merge Files</h3>
+      </div>
+      <form action="{{ url_for('web_merge') }}" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label>Select first file (PDF, Word, PPT, Image)</label>
+          <input type="file" name="pdf1" accept=".pdf,image/*,.doc,.docx,.ppt,.pptx" required>
+        </div>
+        <div class="form-group">
+          <label>Select second file (PDF, Word, PPT, Image)</label>
+          <input type="file" name="pdf2" accept=".pdf,image/*,.doc,.docx,.ppt,.pptx" required>
+        </div>
+        <button type="submit">Merge</button>
+      </form>
+    </div>
+
+    <!-- Insert File -->
+    <div class="card">
+      <div class="card-header">
+        <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M6.5 17A2.5 2.5 0 0 1 9 14.5M6.5 17v2M9 14.5h4M9 14.5v3M13 14.5h7M13 14.5v3"/>
+        </svg>
+        <h3>Insert File</h3>
+      </div>
+      <form action="{{ url_for('web_insert') }}" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label>Target file (PDF, Word, PPT, Image)</label>
+          <input type="file" name="target_pdf" accept=".pdf,image/*,.doc,.docx,.ppt,.pptx" required>
+        </div>
+        <div class="form-group">
+          <label>File to Insert (PDF, Word, PPT, Image)</label>
+          <input type="file" name="insert_file" accept=".pdf,image/*,.doc,.docx,.ppt,.pptx" required>
+        </div>
+        <div class="form-group">
+          <label>Insert at Page Position</label>
+          <input type="number" name="position" placeholder="e.g. 2" min="1" required>
+        </div>
+        <button type="submit">Insert</button>
+      </form>
+    </div>
+
+    <!-- Split PDF -->
+    <div class="card">
+      <div class="card-header">
+        <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 4l12 0M6 12l12 0M6 20l12 0M3 4v16M21 4v16"/>
+        </svg>
+        <h3>Split PDF</h3>
+      </div>
+      <form action="{{ url_for('web_split') }}" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label>File (PDF, Word, PPT, Image)</label>
+          <input type="file" name="pdf" accept=".pdf,image/*,.doc,.docx,.ppt,.pptx" required>
+        </div>
+        <div class="form-group">
+          <label>Split after page</label>
+          <input type="number" name="split_page" placeholder="e.g. 2" min="1" required>
+        </div>
+        <button type="submit">Split</button>
+      </form>
+    </div>
+
+    <!-- Rotate PDF -->
+    <div class="card">
+      <div class="card-header">
+        <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8M3 3v5h5"/>
+        </svg>
+        <h3>Rotate PDF</h3>
+      </div>
+      <form action="{{ url_for('web_rotate') }}" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label>File (PDF, Word, PPT, Image)</label>
+          <input type="file" name="pdf" accept=".pdf,image/*,.doc,.docx,.ppt,.pptx" required>
+        </div>
+        <div class="form-group">
+          <input type="number" name="angle" placeholder="Angle (e.g. 90)" value="90" required>
+        </div>
+        <button type="submit">Rotate</button>
+      </form>
+    </div>
+
+    <!-- Remove Pages -->
+    <div class="card">
+      <div class="card-header">
+        <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-2h2v2zm0-4H7v-2h2v2zm0-4H7V7h2v2zm4 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2zm4 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2z"/>
+        </svg>
+        <h3>Remove Pages</h3>
+      </div>
+      <form action="{{ url_for('web_remove_pages') }}" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label>File (PDF, Word, PPT, Image)</label>
+          <input type="file" name="pdf" accept=".pdf,image/*,.doc,.docx,.ppt,.pptx" required>
+        </div>
+        <div class="form-group">
+          <input type="text" name="pages" placeholder="Pages to remove (e.g. 1,3,5)" required>
+        </div>
+        <button type="submit">Remove</button>
+      </form>
+    </div>
+
+    <!-- Summarise PDF -->
+    <div class="card">
+      <div class="card-header">
+        <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+        <h3>Summarise PDF</h3>
+      </div>
+      <form action="{{ url_for('web_summarise') }}" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label>File (PDF, Word, PPT, Image)</label>
+          <input type="file" name="pdf" accept=".pdf,image/*,.doc,.docx,.ppt,.pptx" required>
+        </div>
+        <button type="submit">Summarise</button>
+      </form>
+    </div>
+
+    <!-- Convert PDF -->
+    <div class="card card-wide">
+      <div class="card-header">
+        <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 7c0-1.1.9-2 2-2h12c1.1 0 2 .9 2 2v10c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V7zm0 0h16M4 17h16"/><circle cx="7" cy="11" r="1.5"/><path d="M11 15l3-4 2 3"/>
+        </svg>
+        <h3>Convert PDF to Word / PPT</h3>
+      </div>
+      <form action="{{ url_for('web_convert') }}" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label>Upload PDF File</label>
+          <input type="file" name="pdf" accept=".pdf" required>
+        </div>
+        <div class="form-group">
+          <label>Convert to:</label>
+          <select name="format" class="form-select" required>
+            <option value="" disabled selected>-- Select format --</option>
+            <option value="word">Word Document (.docx)</option>
+            <option value="ppt">PowerPoint Presentation (.pptx)</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-full">Convert</button>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 File Editor & Summariser</p>
+  </footer>
+</body>
+
+</html>

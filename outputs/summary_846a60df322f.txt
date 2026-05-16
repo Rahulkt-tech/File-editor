@@ -1,0 +1,28 @@
+Skilled in full stack web development and Data Structures &
+Algorithms, with hands-on experience in developing responsive and user-friendly applications.
+Proficient in technologies such as HTML, CSS, JavaScript, React.js, Node.js, Express.js, and MySQL/MongoDB, along with Git and GitHub for version
+control.
+EDUCATION
+INDIAN INSTITUTE OF INFORMATION TEACHNOLOGY KOTTAYAM
+CMR HIGHER SECONDARY SCHOOL
+B.Tech in Computer Science and Engineering
+2024 – Present
+CGPA: 8.23
+Class XII –Kerala Board
+2024
+Percentage: 98.2%
+SKILL
+Analytical Thinking
+Problem Solving
+Team Collaboration
+Adaptability
+Communication
+Development skills
+PROJECTS
+Primate
+Developed a full-stack web application that analyzes and compares product prices across multiple e-
+commerce platforms such as Amazon and Flipkart to help users find the best available deals.
+Designed an interactive and user-friendly interface for image upload and result visualization.
+Utilized
+technologies such as Python, TensorFlow/OpenCV, and modern web technologies for seamless integration
+and performance.

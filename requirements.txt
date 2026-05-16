@@ -1,0 +1,8 @@
+Flask
+PyPDF2
+Werkzeug
+Pillow
+pywin32
+comtypes
+python-docx
+python-pptx

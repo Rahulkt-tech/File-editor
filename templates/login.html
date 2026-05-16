@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | File Editor & Summariser</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="auth-container">
+  <div class="login-modal">
+    <div class="login-modal__header">
+      <div class="login-modal__logo">
+        <div class="logo-folder">
+          <div class="logo-tab"></div>
+          <div class="logo-body"></div>
+          <div class="logo-gear"></div>
+          <div class="logo-trace"></div>
+        </div>
+        <span>File & Summariser</span>
+      </div>
+      <h2>Admin Login</h2>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <div class="login-modal__body">
+      <form method="POST">
+        <div class="login-field">
+          <label for="username">Username</label>
+          <div class="wood-frame">
+            <input type="text" id="username" name="username" value="admin" required>
+          </div>
+        </div>
+
+        <div class="login-field">
+          <label for="password">Password</label>
+          <div class="wood-frame">
+            <input type="password" id="password" name="password" value="admin123" required>
+          </div>
+        </div>
+
+        <button type="submit" class="login-button">Login</button>
+      </form>
+    </div>
+
+    <div class="login-modal__footer">
+      <p>© 2025 File Editor & Summariser</p>
+    </div>
+  </div>
+</body>
+</html>
